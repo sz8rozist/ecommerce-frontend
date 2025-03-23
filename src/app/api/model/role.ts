@@ -9,10 +9,8 @@
  */
 
 
-export interface EcommerceAPIResponse { 
-    errors?: { [key: string]: string; };
-    timestamp?: string;
-    data?: object;
-    message?: string;
+export interface Role { 
+    id?: number;
+    name?: string;
 }
 
