@@ -1,0 +1,68 @@
+<div class="flex-container">
+    <!-- Baloldali panel (Login form) -->
+    <div class="login-panel">
+      <form [formGroup]="form">
+        <div class="tui-col_12 form-content">
+          <h3 class="tui-island__title">Bejelentkezés</h3>
+          <p class="tui-island__paragraph">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <div class="tui-island__paragraph tui-island__paragraph_link">
+            <div class="tui-form__row">
+              <p>
+                <tui-input formControlName="email">
+                  Írja be az email címét
+                </tui-input>
+              </p>
+            </div>
+            <div class="tui-form__row">
+              <p>
+                <tui-input formControlName="password">
+                  Írja be a jelszavát
+                </tui-input>
+              </p>
+            </div>
+            <div class="tui-form__row"></div>
+          </div>
+  
+          <!-- Gombok és feliratok konténere -->
+          <div class="buttons-container">
+            <!-- Bejelentkezés gomb jobbra igazítva -->
+            <div class="login-btn-wrapper">
+              <a
+                tuiButton
+                type="button"
+                appearance="accent"
+                [routerLink]="['/dashboard']"
+                size="m"
+                class="login-btn"
+              >
+                Bejelentkezés
+              </a>
+            </div>
+            <!-- Szöveges felirat regisztrációhoz -->
+            <div class="register-text">
+              Nincs még fiókod? 
+              <a
+                [routerLink]="['/register']"
+                class="register-link"
+              >
+                Regisztrálj itt!
+              </a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Jobb oldali panel (Logo) -->
+    <div class="logo-panel">
+      <img
+        src="https://taiga-ui.dev/assets/images/taiga.svg"
+        alt="Taiga UI Logo"
+      />
+      <h1 class="text-xl font-semibold">Taiga UI Admin panel</h1>
+    </div>
+  </div>
+  
