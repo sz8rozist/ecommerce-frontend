@@ -41,26 +41,30 @@ export class LoginComponent implements OnInit {
       username: this.form.get('username')?.value,
       password: this.form.get('password')?.value,
     };
-    this.userController
-      .signin(request)
-      .subscribe({
-        next: (user) => {
-          console.log('Felhasználó bejelentkezett:', user);
-          // Itt például átirányíthatod a felhasználót a főoldalra vagy másik oldalra
-        },
-        error: (err) => {
-          console.error('Hiba történt a bejelentkezéskor:', err);
-          if (err.error?.errors) {
-            const backendErrors = err.error.errors;
-            console.log(backendErrors);
-            Object.keys(backendErrors).forEach(field => {
-              const control = this.form.get(field);
-              if (control) {
-                control.setErrors({ backend: backendErrors[field] });
-              }
-            });
-          }
-        },
-      });
+    this.userController.signin(request).subscribe({
+      next: (user) => {
+        console.log('Felhasználó bejelentkezett:', user);
+        // Itt például átirányíthatod a felhasználót a főoldalra vagy másik oldalra
+      },
+      error: (err) => {
+        console.error('Hiba történt a bejelentkezéskor:', err);
+        if (err.error?.errors) {
+          const backendErrors = err.error.errors;
+          console.log(backendErrors);
+          Object.keys(backendErrors).forEach((field) => {
+            const control = this.form.get(field);
+            if (control) {
+              control.setErrors({ backend: backendErrors[field] });
+            }
+          });
+        }
+      },
+    });
+  }
+
+  onForgotPassword(event: Event) {
+    event.preventDefault();
+    console.log('Jelszó-emlékeztető kérése indítva.');
+    // Itt lehetne további logikát hozzáadni, például egy szolgáltatás hívását
   }
 }

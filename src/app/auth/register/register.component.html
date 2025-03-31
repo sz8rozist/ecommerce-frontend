@@ -1,1 +1,76 @@
-<p>register works!</p>
+<div class="flex-container">
+  <div class="login-panel">
+    <form [formGroup]="form">
+      <div class="tui-form__row">
+        <label for="username">Felhasználónév</label>
+        <tui-input formControlName="username" id="username">
+          Írja be a felhasználó nevét
+        </tui-input>
+        @if (form.get('username')?.invalid && form.get('username')?.touched) {
+        @if (form.get('username')?.hasError('required')) {
+        <small>A felhasználónév megadása kötelező.</small>
+        } }
+      </div>
+
+      <div class="tui-form__row">
+        <label for="email">Email</label>
+        <tui-input formControlName="email" id="email">
+          Írja be az email címét
+        </tui-input>
+        @if (form.get('email')?.invalid && form.get('email')?.touched) { @if
+        (form.get('email')?.hasError('required')) {
+        <small>Az email cím megadása kötelező.</small>
+        } @else if (form.get('email')?.hasError('email')) {
+        <small>Kérjük, érvényes email címet adjon meg.</small>
+        } }
+      </div>
+
+      <div class="tui-form__row">
+        <label for="password">Jelszó</label>
+        <tui-input formControlName="password" id="password" type="password">
+          Írja be a jelszavát
+        </tui-input>
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+        @if (form.get('password')?.hasError('required')) {
+        <small>A jelszó megadása kötelező.</small>
+        } @else if (form.get('password')?.hasError('minlength')) {
+        <small>A jelszónak legalább 8 karakter hosszúnak kell lennie.</small>
+        } @else if (form.get('password')?.hasError('pattern')) {
+        <small
+          >A jelszónak tartalmaznia kell legalább egy nagybetűt és egy
+          számot.</small
+        >
+        } }
+      </div>
+
+      <div class="buttons-container">
+        <div class="login-btn-wrapper">
+          <button
+            tuiButton
+            type="button"
+            appearance="accent"
+            (click)="onRegister()"
+            [disabled]="form.invalid"
+          >
+            Regisztráció
+          </button>
+        </div>
+        <div class="register-text">
+          Ha van már fiókod, akkor itt tudsz bejelentkezni
+          <br />
+          <a [routerLink]="['/login']" class="register-link">
+            Jelentkezz be itt!
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="logo-panel">
+    <img
+      src="https://taiga-ui.dev/assets/images/taiga.svg"
+      alt="Taiga UI Logo"
+    />
+    <h1 class="text-xl font-semibold">Taiga UI Admin panel</h1>
+  </div>
+</div>
