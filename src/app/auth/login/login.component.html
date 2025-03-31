@@ -11,7 +11,7 @@
           <div class="tui-island__paragraph tui-island__paragraph_link">
             <div class="tui-form__row">
               <p>
-                <tui-input formControlName="email">
+                <tui-input formControlName="username">
                   Írja be az email címét
                 </tui-input>
               </p>
@@ -34,7 +34,7 @@
                 tuiButton
                 type="button"
                 appearance="accent"
-                [routerLink]="['/dashboard']"
+                (click)="onLogin()"
                 size="m"
                 class="login-btn"
               >

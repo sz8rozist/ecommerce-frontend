@@ -1,5 +1,11 @@
+export * from './cartController.service';
+import { CartControllerService } from './cartController.service';
+export * from './orderController.service';
+import { OrderControllerService } from './orderController.service';
+export * from './productController.service';
+import { ProductControllerService } from './productController.service';
 export * from './roleController.service';
 import { RoleControllerService } from './roleController.service';
 export * from './userController.service';
 import { UserControllerService } from './userController.service';
-export const APIS = [RoleControllerService, UserControllerService];
+export const APIS = [CartControllerService, OrderControllerService, ProductControllerService, RoleControllerService, UserControllerService];

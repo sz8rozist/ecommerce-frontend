@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, TuiRoot ],
+  imports: [RouterOutlet, CommonModule, TuiRoot],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

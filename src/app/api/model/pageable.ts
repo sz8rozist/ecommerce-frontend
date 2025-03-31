@@ -9,7 +9,9 @@
  */
 
 
-export interface AuthResponse { 
-    token?: string;
+export interface Pageable { 
+    page?: number;
+    size?: number;
+    sort?: Array<string>;
 }
 

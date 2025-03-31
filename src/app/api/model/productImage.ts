@@ -7,16 +7,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Role } from './role';
-import { Cart } from './cart';
+import { Product } from './product';
 
 
-export interface User { 
+export interface ProductImage { 
     id?: number;
-    username?: string;
-    password?: string;
-    email?: string;
-    roles?: Array<Role>;
-    carts?: Array<Cart>;
+    imageUrl?: string;
+    product?: Product;
 }
 

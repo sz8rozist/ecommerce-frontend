@@ -9,6 +9,8 @@ import {
 import { TuiButton } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { RouterModule } from '@angular/router';
+import { SigninRequest, UserControllerService } from '../../api';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -26,16 +28,39 @@ import { RouterModule } from '@angular/router';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor() {
+  constructor(private userController: UserControllerService) {
     this.form = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(32),
-      ])
+      username: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
     });
   }
 
   ngOnInit(): void {}
+
+  onLogin() {
+    const request: SigninRequest = {
+      username: this.form.get('username')?.value,
+      password: this.form.get('password')?.value,
+    };
+    this.userController
+      .signin(request)
+      .subscribe({
+        next: (user) => {
+          console.log('Felhasználó bejelentkezett:', user);
+          // Itt például átirányíthatod a felhasználót a főoldalra vagy másik oldalra
+        },
+        error: (err) => {
+          console.error('Hiba történt a bejelentkezéskor:', err.error);
+          if (err.error?.errors) {
+            const backendErrors = err.error.errors;
+            Object.keys(backendErrors).forEach(field => {
+              const control = this.form.get(field);
+              if (control) {
+                control.setErrors({ backend: backendErrors[field] });
+              }
+            });
+          }
+        },
+      });
+  }
 }
