@@ -10,7 +10,6 @@ import { TuiButton } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { RouterModule } from '@angular/router';
 import { SigninRequest, UserControllerService } from '../../api';
-import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -50,9 +49,10 @@ export class LoginComponent implements OnInit {
           // Itt például átirányíthatod a felhasználót a főoldalra vagy másik oldalra
         },
         error: (err) => {
-          console.error('Hiba történt a bejelentkezéskor:', err.error);
+          console.error('Hiba történt a bejelentkezéskor:', err);
           if (err.error?.errors) {
             const backendErrors = err.error.errors;
+            console.log(backendErrors);
             Object.keys(backendErrors).forEach(field => {
               const control = this.form.get(field);
               if (control) {
