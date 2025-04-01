@@ -15,8 +15,8 @@
               </tui-input>
               @if (form.get('username')?.invalid &&
               form.get('username')?.touched) { @if
-              (form.get('username')?.hasError('required')) {
-              <small>A felhasználónév megadása kötelező.</small>
+              (form.get('username')?.hasError('backend')) {
+                <small>{{form.get('username')?.getError('backend')}}</small>                
               } }
             </p>
           </div>
@@ -25,11 +25,10 @@
               <tui-input formControlName="password">
                 Írja be a jelszavát
               </tui-input>
-              @if (form.get('password')?.invalid &&
-              form.get('password')?.touched) { @if
-              (form.get('password')?.hasError('required')) {
-              <small>A jelszó megadása kötelező.</small>
-              } }
+              @if (form.get('password')?.invalid && form.get('password')?.touched) {
+                @if (form.get('password')?.hasError('backend')) {
+                  <small>{{form.get('password')?.getError('backend')}}</small>                }
+              }
             </p>
           </div>
           <div class="tui-form__row"></div>

@@ -10,6 +10,7 @@ import { TuiButton } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { RouterModule } from '@angular/router';
 import { SigninRequest, UserControllerService } from '../../api';
+import { handleBackendErrors } from '../../common/form-error-handler';
 
 @Component({
   selector: 'app-login',
@@ -42,22 +43,13 @@ export class LoginComponent implements OnInit {
       password: this.form.get('password')?.value,
     };
     this.userController.signin(request).subscribe({
-      next: (user) => {
-        console.log('Felhasználó bejelentkezett:', user);
+      next: () => {
+        console.log('Felhasználó bejelentkezett');
         // Itt például átirányíthatod a felhasználót a főoldalra vagy másik oldalra
       },
       error: (err) => {
         console.error('Hiba történt a bejelentkezéskor:', err);
-        if (err.error?.errors) {
-          const backendErrors = err.error.errors;
-          console.log(backendErrors);
-          Object.keys(backendErrors).forEach((field) => {
-            const control = this.form.get(field);
-            if (control) {
-              control.setErrors({ backend: backendErrors[field] });
-            }
-          });
-        }
+        handleBackendErrors(err, this.form);
       },
     });
   }
