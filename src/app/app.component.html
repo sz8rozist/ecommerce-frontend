@@ -23,8 +23,32 @@
     <div class="content">
       <header class="header">
         <span class="spacer"></span>
-        <span>aaa</span>
-        <button tuiButton appearance="flat" (click)="logout()">Kijelentkezés</button>
+        <button
+        appearance="flat"
+    tuiButton
+    tuiChevron
+    type="button"
+    [tuiDropdown]="dropdownContent"
+    [tuiDropdownManual]="open"
+    [tuiObscuredEnabled]="open"
+    (click)="onClick()"
+    (tuiActiveZoneChange)="onActiveZone($event)"
+    (tuiObscured)="onObscured($event)"
+    class="avatar-button"
+>
+    <tui-avatar
+        src="@tui.user"
+        size="m"
+        text="U"
+    ></tui-avatar>
+</button>
+
+<ng-template #dropdownContent>
+    <tui-data-list class="dropdown-menu">
+        <button tuiOption (click)="navigateToProfile()">Profil</button>
+        <button tuiOption (click)="logout()">Kijelentkezés</button>
+    </tui-data-list>
+</ng-template>
       </header>
 
       <main>
