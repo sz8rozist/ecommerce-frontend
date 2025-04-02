@@ -11,6 +11,7 @@ import { TuiInputModule } from '@taiga-ui/legacy';
 import { RouterModule } from '@angular/router';
 import { SigninRequest, UserControllerService } from '../../api';
 import { handleBackendErrors } from '../../common/form-error-handler';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ import { handleBackendErrors } from '../../common/form-error-handler';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private userController: UserControllerService) {
+  constructor(private userController: UserControllerService, private authService: AuthServiceService) {
     this.form = new FormGroup({
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.userController.signin(request).subscribe({
       next: () => {
         console.log('Felhasználó bejelentkezett');
-        // Itt például átirányíthatod a felhasználót a főoldalra vagy másik oldalra
+        this.authService.redirectBasedOnRole();
       },
       error: (err) => {
         console.error('Hiba történt a bejelentkezéskor:', err);
