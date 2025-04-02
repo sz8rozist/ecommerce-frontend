@@ -63,3 +63,7 @@ For more information on using the Angular CLI, including detailed command refere
 ```bash
 npm run generate-api
 ```
+
+## Ikonok amiket használunk
+
+https://lucide.dev/icons/

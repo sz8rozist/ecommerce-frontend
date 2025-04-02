@@ -1,3 +1,36 @@
 <tui-root>
-  <router-outlet></router-outlet>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <nav [class.collapsed]="isCollapsed" class="sidebar">
+      <button tuiIconButton [iconStart]="isCollapsed ? '@tui.menu' : '@tui.x'"  (click)="toggleSidebar()" appearance="flat"></button>
+      <ul>
+        <li routerLink="/admin/dashboard">
+          <tui-icon icon="@tui.home" src="tuiIconHome"></tui-icon>
+          <span *ngIf="!isCollapsed">Dashboard</span>
+        </li>
+        <li routerLink="/admin/users">
+          <tui-icon icon="@tui.user"></tui-icon>
+          <span *ngIf="!isCollapsed">Felhasználók</span>
+        </li>
+        <li routerLink="/admin/settings">
+          <tui-icon icon="@tui.settings" ></tui-icon>
+          <span *ngIf="!isCollapsed">Beállítások</span>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Content -->
+    <div class="content">
+      <header class="header">
+        <span class="spacer"></span>
+        <span>aaa</span>
+        <button tuiButton appearance="flat" (click)="logout()">Kijelentkezés</button>
+      </header>
+
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
 </tui-root>
+
