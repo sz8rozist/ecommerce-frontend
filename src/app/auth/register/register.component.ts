@@ -10,6 +10,8 @@ import { TuiButton } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { RouterModule } from '@angular/router';
 import { SignupRequest, UserControllerService } from '../../api';
+import { TuiIcon, TuiTextfield } from '@taiga-ui/core';
+import { TuiPassword } from '@taiga-ui/kit';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +21,9 @@ import { SignupRequest, UserControllerService } from '../../api';
     ReactiveFormsModule,
     TuiButton,
     RouterModule,
+    TuiIcon,
+    TuiPassword,
+    TuiTextfield,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -33,13 +38,14 @@ export class RegisterComponent implements OnInit {
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern('(?=.*[A-Z])(?=.*[0-9]).*'),
+        Validators.pattern(
+          '(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).*'
+        ),
       ]),
     });
   }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+
+  ngOnInit(): void {}
 
   onRegister() {
     if (this.form.valid) {

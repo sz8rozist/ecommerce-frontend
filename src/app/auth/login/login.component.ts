@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { SigninRequest, UserControllerService } from '../../api';
 import { handleBackendErrors } from '../../common/form-error-handler';
 import { AuthServiceService } from '../auth-service.service';
+import { TuiIcon, TuiTextfield } from '@taiga-ui/core';
+import { TuiPassword } from '@taiga-ui/kit';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,9 @@ import { AuthServiceService } from '../auth-service.service';
     TuiInputModule,
     TuiButton,
     RouterModule,
+    TuiIcon,
+    TuiPassword,
+    TuiTextfield,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -29,7 +34,10 @@ import { AuthServiceService } from '../auth-service.service';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private userController: UserControllerService, private authService: AuthServiceService) {
+  constructor(
+    private userController: UserControllerService,
+    private authService: AuthServiceService
+  ) {
     this.form = new FormGroup({
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),

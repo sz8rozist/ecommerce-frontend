@@ -27,9 +27,11 @@
 
       <div class="tui-form__row">
         <label for="password">Jelszó</label>
-        <tui-input formControlName="password" id="password" type="password">
-          Írja be a jelszavát
-        </tui-input>
+        <tui-textfield>
+          <label tuiLabel>Írja be a jelszavát</label>
+          <input formControlName="password" tuiTextfield type="password" />
+          <tui-icon tuiPassword />
+        </tui-textfield>
         @if (form.get('password')?.invalid && form.get('password')?.touched) {
         @if (form.get('password')?.hasError('required')) {
         <small>A jelszó megadása kötelező.</small>
@@ -37,8 +39,8 @@
         <small>A jelszónak legalább 8 karakter hosszúnak kell lennie.</small>
         } @else if (form.get('password')?.hasError('pattern')) {
         <small
-          >A jelszónak tartalmaznia kell legalább egy nagybetűt és egy
-          számot.</small
+          >A jelszónak tartalmaznia kell legalább egy nagybetűt és egy számot és
+          speciális karaktert.</small
         >
         } }
       </div>

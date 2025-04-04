@@ -10,25 +10,33 @@
         <div class="tui-island__paragraph tui-island__paragraph_link">
           <div class="tui-form__row">
             <p>
+              <label for="username">Felhasználónév</label>
               <tui-input formControlName="username">
                 Írja be a felhasználó nevét
               </tui-input>
               @if (form.get('username')?.invalid &&
               form.get('username')?.touched) { @if
               (form.get('username')?.hasError('backend')) {
-                <small>{{form.get('username')?.getError('backend')}}</small>                
+              <small>{{ form.get("username")?.getError("backend") }}</small>
               } }
             </p>
           </div>
           <div class="tui-form__row">
             <p>
-              <tui-input formControlName="password">
-                Írja be a jelszavát
-              </tui-input>
-              @if (form.get('password')?.invalid && form.get('password')?.touched) {
-                @if (form.get('password')?.hasError('backend')) {
-                  <small>{{form.get('password')?.getError('backend')}}</small>                }
-              }
+              <label for="password">Jelszó</label>
+              <tui-textfield>
+                <label tuiLabel>Írja be a jelszavát</label>
+                <input
+                  formControlName="password"
+                  tuiTextfield
+                  type="password"
+                />
+                <tui-icon tuiPassword />
+              </tui-textfield>
+              @if (form.get('password')?.invalid &&
+              form.get('password')?.touched) { @if
+              (form.get('password')?.hasError('backend')) {
+              <small>{{ form.get("password")?.getError("backend") }}</small> } }
             </p>
           </div>
           <div class="tui-form__row"></div>
@@ -53,7 +61,9 @@
             </a>
           </div>
           <div class="forgot-password">
-            <a href="#" (click)="onForgotPassword($event)">Elfelejtett jelszavát?</a>
+            <a href="#" (click)="onForgotPassword($event)"
+              >Elfelejtett jelszavát?</a
+            >
           </div>
         </div>
       </div>
