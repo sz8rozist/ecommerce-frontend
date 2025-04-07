@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthServiceService
   ) {
     this.form = new FormGroup({
-      username: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
+      username: new FormControl(null, []),
+      password: new FormControl(null, []),
     });
   }
 

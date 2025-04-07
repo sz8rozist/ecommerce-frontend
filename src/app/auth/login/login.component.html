@@ -14,11 +14,10 @@
               <tui-input formControlName="username">
                 Írja be a felhasználó nevét
               </tui-input>
-              @if (form.get('username')?.invalid &&
-              form.get('username')?.touched) { @if
+              @if
               (form.get('username')?.hasError('backend')) {
-              <small>{{ form.get("username")?.getError("backend") }}</small>
-              } }
+              <small class="error-field">{{ form.get("username")?.getError("backend") }}</small>
+              }
             </p>
           </div>
           <div class="tui-form__row">
@@ -33,10 +32,9 @@
                 />
                 <tui-icon tuiPassword />
               </tui-textfield>
-              @if (form.get('password')?.invalid &&
-              form.get('password')?.touched) { @if
+               @if
               (form.get('password')?.hasError('backend')) {
-              <small>{{ form.get("password")?.getError("backend") }}</small> } }
+              <small class="error-field">{{ form.get("password")?.getError("backend") }}</small> }
             </p>
           </div>
           <div class="tui-form__row"></div>
@@ -49,7 +47,6 @@
               type="button"
               appearance="accent"
               (click)="onLogin()"
-              [disabled]="form.invalid"
             >
               Bejelentkezés
             </button>

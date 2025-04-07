@@ -18,5 +18,6 @@ export interface User {
     email?: string;
     roles?: Array<Role>;
     carts?: Array<Cart>;
+    resetToken?: string;
 }
 
