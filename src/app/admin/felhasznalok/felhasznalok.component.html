@@ -8,15 +8,25 @@
         <th tuiTh>Műveletek</th>
       </tr>
     </thead>
-    <tbody tuiTbody [data]="users">
-    
+    <tbody tuiTbody>
+        @for (user of users?.content; track $index) {
+            <tr>
+            <td tuiTd>{{ user.username }}</td>
+            <td tuiTd>{{ user.email }}</td>
+            <td tuiTd>
+              <!-- Műveletek -->
+              <button tuiButton >Szerkesztés</button>
+              <button tuiButton >Törlés</button>
+            </td>
+        </tr>
+        }
     </tbody>
   </table>
 
   <!-- Lapozás -->
   <tui-table-pagination
   [total]="totalRecords"
-  [size]="pageable.size"
-  [page]="pageable.page"
-  (indexChange)="onPageChange(pageable.page)">
+  [size]="size"
+  [page]="page"
+  (paginationChange)="onPageChange($event)">
 </tui-table-pagination>

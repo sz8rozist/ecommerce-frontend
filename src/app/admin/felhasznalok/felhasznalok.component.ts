@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { PageUser, UserControllerService } from '../../api';
 import {TuiTable} from '@taiga-ui/addon-table';
-import { PageRequest } from '../../common/PageRequest';
 import { TuiTablePagination } from '@taiga-ui/addon-table';
+import type { TuiTablePaginationEvent } from '@taiga-ui/addon-table';
 @Component({
   selector: 'app-felhasznalok',
   imports: [TuiTable,TuiTablePagination],
   templateUrl: './felhasznalok.component.html',
-  styleUrl: './felhasznalok.component.css'
+  styleUrl: './felhasznalok.component.css',
 })
 export class FelhasznalokComponent {
-  users: PageUser[] = [];
+  users?: PageUser;
   totalRecords: number = 0;
-  pageable: PageRequest ={ page: 0, size: 2 };
-
+  page: number = 0;
+  size: number = 10;
   constructor(private userController: UserControllerService){}
 
   ngOnInit(): void {
@@ -21,9 +21,9 @@ export class FelhasznalokComponent {
   }
 
   loadUsers(): void {
-    this.userController.findAll(this.pageable.page, this.pageable.size).subscribe(
+    this.userController.findAll(this.page, this.size).subscribe(
       (response: any) => {
-        this.users = response.content;
+        this.users = response;
         this.totalRecords = response.totalElements;
       },
       (error) => {
@@ -32,8 +32,9 @@ export class FelhasznalokComponent {
     );
   }
 
-  onPageChange(page: number): void {
-    this.pageable.page = page - 1;  // A Taiga UI-nál az oldalszám 1-től kezdődik, de az API 0-tól
+  onPageChange({ page, size }: TuiTablePaginationEvent): void {
+    this.page = page;
+    this.size = size;
     this.loadUsers();
   }
 }

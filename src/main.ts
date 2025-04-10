@@ -9,8 +9,6 @@ import { ApiModule, Configuration } from './app/api';
 import { environment } from './app/environment/environment';
 import { importProvidersFrom } from '@angular/core';
 import { AuthServiceService } from './app/auth/auth-service.service';
-import { TUI_LANGUAGE } from '@taiga-ui/i18n';
-import { TUI_HUNGARY_LANGUAGE } from './app/languages/hu';
 const apiConfig = new Configuration({
   basePath: environment.apiUrl,
 });
@@ -23,9 +21,5 @@ bootstrapApplication(AppComponent, {
     AuthServiceService,
     { provide: Configuration, useValue: apiConfig },  // API kliens konfiguráció
     importProvidersFrom(ApiModule.forRoot(() => apiConfig)),  // ApiModule inicializálása
-    {
-      provide: TUI_LANGUAGE,
-      useValue: TUI_HUNGARY_LANGUAGE,
-    }
   ],
 }).catch((err) => console.error(err));
