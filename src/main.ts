@@ -8,6 +8,7 @@ import { authInterceptor } from './app/auth.interceptor';
 import { ApiModule, Configuration } from './app/api';
 import { environment } from './app/environment/environment';
 import { importProvidersFrom } from '@angular/core';
+import { AuthServiceService } from './app/auth/auth-service.service';
 const apiConfig = new Configuration({
   basePath: environment.apiUrl,
 });
@@ -17,6 +18,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(withInterceptors([authInterceptor])),
+    AuthServiceService,
     { provide: Configuration, useValue: apiConfig },  // API kliens konfiguráció
     importProvidersFrom(ApiModule.forRoot(() => apiConfig))  // ApiModule inicializálása
   ],

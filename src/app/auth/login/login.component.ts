@@ -9,7 +9,7 @@ import {
 import { TuiButton } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { RouterModule } from '@angular/router';
-import { SigninRequest, UserControllerService } from '../../api';
+import { JwtTokenResponse, SigninRequest, UserControllerService } from '../../api';
 import { handleBackendErrors } from '../../common/form-error-handler';
 import { AuthServiceService } from '../auth-service.service';
 import { TuiIcon, TuiTextfield } from '@taiga-ui/core';
@@ -52,9 +52,12 @@ export class LoginComponent implements OnInit {
       password: this.form.get('password')?.value,
     };
     this.userController.signin(request).subscribe({
-      next: () => {
+      next: (token: JwtTokenResponse) => {
         console.log('Felhasználó bejelentkezett');
-        this.authService.redirectBasedOnRole();
+        if(token.token){
+          this.authService.saveToken(token.token);
+          this.authService.redirectBasedOnRole();
+        }
       },
       error: (err) => {
         console.error('Hiba történt a bejelentkezéskor:', err);

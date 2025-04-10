@@ -1,4 +1,5 @@
 export * from './cart';
+export * from './jwtTokenResponse';
 export * from './order';
 export * from './pageUser';
 export * from './pageable';

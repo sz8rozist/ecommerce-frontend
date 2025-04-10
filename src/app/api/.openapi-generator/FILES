@@ -14,6 +14,7 @@ encoder.ts
 git_push.sh
 index.ts
 model/cart.ts
+model/jwtTokenResponse.ts
 model/models.ts
 model/order.ts
 model/pageUser.ts
