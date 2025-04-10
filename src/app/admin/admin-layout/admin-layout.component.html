@@ -4,17 +4,17 @@
       <nav [class.collapsed]="isCollapsed" class="sidebar">
         <button tuiIconButton [iconStart]="isCollapsed ? '@tui.menu' : '@tui.x'"  (click)="toggleSidebar()" appearance="flat"></button>
         <ul>
-          <li routerLink="/admin/dashboard">
-            <tui-icon icon="@tui.home" src="tuiIconHome"></tui-icon>
-            <span *ngIf="!isCollapsed">Dashboard</span>
+          <li routerLink="dashboard">
+              <tui-icon icon="@tui.home"></tui-icon>
+              <span *ngIf="!isCollapsed">Dashboard</span>
           </li>
-          <li routerLink="/admin/users">
-            <tui-icon icon="@tui.user"></tui-icon>
-            <span *ngIf="!isCollapsed">Felhasználók</span>
+          <li routerLink="users">
+              <tui-icon icon="@tui.user"></tui-icon>
+              <span *ngIf="!isCollapsed">Felhasználók</span>
           </li>
-          <li routerLink="/admin/settings">
-            <tui-icon icon="@tui.settings" ></tui-icon>
-            <span *ngIf="!isCollapsed">Beállítások</span>
+          <li routerLink="settings">
+              <tui-icon icon="@tui.settings" ></tui-icon>
+              <span *ngIf="!isCollapsed">Beállítások</span>
           </li>
         </ul>
       </nav>
@@ -45,7 +45,7 @@
   
   <ng-template #dropdownContent>
       <tui-data-list class="dropdown-menu">
-          <button tuiOption (click)="navigateToProfile()">Profil</button>
+          <button tuiOption>Profil</button>
           <button tuiOption (click)="logout()">Kijelentkezés</button>
       </tui-data-list>
   </ng-template>

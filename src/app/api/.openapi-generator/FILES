@@ -18,7 +18,6 @@ model/jwtTokenResponse.ts
 model/models.ts
 model/order.ts
 model/pageUser.ts
-model/pageable.ts
 model/pageableObject.ts
 model/product.ts
 model/productImage.ts

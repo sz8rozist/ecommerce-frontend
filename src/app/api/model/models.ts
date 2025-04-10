@@ -2,7 +2,6 @@ export * from './cart';
 export * from './jwtTokenResponse';
 export * from './order';
 export * from './pageUser';
-export * from './pageable';
 export * from './pageableObject';
 export * from './product';
 export * from './productImage';

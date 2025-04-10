@@ -1,0 +1,22 @@
+
+ <!-- Taiga UI táblázat -->
+  <table tuiTable class="table">
+    <thead>
+      <tr>
+        <th tuiTh>Felhasználónév</th>
+        <th tuiTh>E-mail</th>
+        <th tuiTh>Műveletek</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody [data]="users">
+    
+    </tbody>
+  </table>
+
+  <!-- Lapozás -->
+  <tui-table-pagination
+  [total]="totalRecords"
+  [size]="pageable.size"
+  [page]="pageable.page"
+  (indexChange)="onPageChange(pageable.page)">
+</tui-table-pagination>

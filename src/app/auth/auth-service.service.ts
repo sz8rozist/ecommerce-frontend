@@ -17,7 +17,7 @@ export class AuthServiceService {
       next: (user: User) => {
         console.log(user);
         if (user.roles?.some((role) => role.name === 'ADMIN')) {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin/dashboard']);
         } else {
           this.router.navigate(['/shop']);
         }
