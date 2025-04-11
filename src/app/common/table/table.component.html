@@ -1,0 +1,66 @@
+<search tuiSearch>
+    <form [formGroup]="searchForm">
+      <fieldset formArrayName="filters">
+        <tui-search-filters>
+          Filters
+          <button tuiButton type="reset">
+            Reset
+          </button>
+          <ng-container *ngFor="let filterCtrl of filters.controls; let i = index">
+            <div [formGroupName]="i">
+              <tui-textfield *tuiItem>
+                <label tuiLabel>{{ filterCtrl.get('label')?.value }}</label>
+                <input
+                  [placeholder]="filterCtrl.get('placeholder')?.value || 'Search'"
+                  tuiTextfield
+                  formControlName="value"
+                />
+              </tui-textfield>
+            </div>
+          </ng-container>
+        </tui-search-filters>
+        <button
+          size="m"
+          tuiButton
+          appearance="accent"
+          type="button"
+          iconStart='@tui.search'
+          (click)="onSearch()"
+        >
+          Keresés
+        </button>
+      </fieldset>
+    </form>
+  </search>
+  
+  <table tuiTable [style.width.%]="100" class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columns" tuiTh>{{ col.header }}</th>
+        <th tuiTh>Műveletek</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody>
+      <tr *ngFor="let item of data">
+        <td *ngFor="let col of columns" tuiTd>{{ item[col.field] }}</td>
+        <td tuiTd>
+          <!-- Példa műveleti gombok -->
+          <button tuiIconButton type="button" appearance="flat" (click)="onUpdate(item)">
+            <tui-icon icon="@tui.file-pen-line" [style.color]="'#007bff'"></tui-icon>
+          </button>
+          <button tuiIconButton type="button" appearance="flat" (click)="onDelete(item.id)">
+            <tui-icon icon="@tui.trash" [style.color]="'var(--tui-status-negative)'"></tui-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <tui-table-pagination
+    [total]="totalRecords"
+    [size]="size"
+    [page]="page"
+    (paginationChange)="onPageChange($event)"
+  >
+  </tui-table-pagination>
+  

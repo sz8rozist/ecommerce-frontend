@@ -1,70 +1,15 @@
-
- <search tuiSearch>
-	    <form [formGroup]="form">
-	        <fieldset formArrayName="filters">
-	            <tui-search-filters>
-	                Szűrés
-	                <button
-	                    tuiButton
-	                    type="reset"
-	                >
-	                    Visszaállítás
-	                </button>
-	                <ng-container *ngFor="let control of filters.controls; let i = index">
-                    <div [formGroupName]="i">
-                      <tui-textfield *tuiItem>
-                        <label tuiLabel>{{ control.get('name')?.value }}</label>
-                        <input placeholder="Search" tuiTextfield formControlName="value" />
-                      </tui-textfield>
-                    </div>
-	                </ng-container>
-	            </tui-search-filters>
-              <button
-              size="m"
-              tuiButton
-              appearance="accent"
-              type="button"
-              iconStart='@tui.search'
-          >
-              Keresés
-          </button>
-	        </fieldset>
-	    </form>
-	</search>
-	<p>
-	    <code>{{ form.value | json }}</code>
-	</p>
-  <table tuiTable [style.width.%]="100" class="table">
-    <thead>
-      <tr>
-        <th tuiTh>Felhasználónév</th>
-        <th tuiTh>E-mail</th>
-        <th tuiTh>Műveletek</th>
-      </tr>
-    </thead>
-    <tbody tuiTbody>
-        @for (user of users?.content; track $index) {
-            <tr>
-            <td tuiTd>{{ user.username }}</td>
-            <td tuiTd>{{ user.email }}</td>
-            <td tuiTd>
-              <!-- Műveletek -->
-              <button tuiIconButton type="button" appearance="flat">
-                <tui-icon icon="@tui.file-pen-line" [style.color]="'#007bff'"></tui-icon>
-              </button>
-              <button tuiIconButton type="button" appearance="flat">
-                <tui-icon icon="@tui.trash" [style.color]="'var(--tui-status-negative)'"></tui-icon>
-              </button>
-            </td>
-        </tr>
-        }
-    </tbody>
-  </table>
-
-  <!-- Lapozás -->
-  <tui-table-pagination
-  [total]="totalRecords"
-  [size]="size"
+<app-table
+  [data]="users?.content ?? []"
+  [columns]="[
+    { header: 'Felhasználónév', field: 'username' },
+    { header: 'E-mail', field: 'email' }
+  ]"
+  [totalRecords]="totalRecords"
   [page]="page"
-  (paginationChange)="onPageChange($event)">
-</tui-table-pagination>
+  [size]="size"
+  (pageChange)="onPageChange($event)"
+  (search)="onSearch($event)"
+  [filterConfigs]="[
+  { name: 'username', label: 'Felhasználónév' }
+]"
+></app-table>
