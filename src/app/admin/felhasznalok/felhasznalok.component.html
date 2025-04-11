@@ -1,6 +1,40 @@
 
- <!-- Taiga UI táblázat -->
-  <table tuiTable class="table">
+ <search tuiSearch>
+	    <form [formGroup]="form">
+	        <fieldset formArrayName="filters">
+	            <tui-search-filters>
+	                Szűrés
+	                <button
+	                    tuiButton
+	                    type="reset"
+	                >
+	                    Visszaállítás
+	                </button>
+	                <ng-container *ngFor="let control of filters.controls; let i = index">
+                    <div [formGroupName]="i">
+                      <tui-textfield *tuiItem>
+                        <label tuiLabel>{{ control.get('name')?.value }}</label>
+                        <input placeholder="Search" tuiTextfield formControlName="value" />
+                      </tui-textfield>
+                    </div>
+	                </ng-container>
+	            </tui-search-filters>
+              <button
+              size="m"
+              tuiButton
+              appearance="accent"
+              type="button"
+              iconStart='@tui.search'
+          >
+              Keresés
+          </button>
+	        </fieldset>
+	    </form>
+	</search>
+	<p>
+	    <code>{{ form.value | json }}</code>
+	</p>
+  <table tuiTable [style.width.%]="100" class="table">
     <thead>
       <tr>
         <th tuiTh>Felhasználónév</th>
@@ -15,8 +49,12 @@
             <td tuiTd>{{ user.email }}</td>
             <td tuiTd>
               <!-- Műveletek -->
-              <button tuiButton >Szerkesztés</button>
-              <button tuiButton >Törlés</button>
+              <button tuiIconButton type="button" appearance="flat">
+                <tui-icon icon="@tui.file-pen-line" [style.color]="'#007bff'"></tui-icon>
+              </button>
+              <button tuiIconButton type="button" appearance="flat">
+                <tui-icon icon="@tui.trash" [style.color]="'var(--tui-status-negative)'"></tui-icon>
+              </button>
             </td>
         </tr>
         }

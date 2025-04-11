@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { TuiActiveZone, TuiObscured } from '@taiga-ui/cdk';
-import { TuiRoot, TuiIcon, TuiButton, TuiDropdown, TuiDataList } from '@taiga-ui/core';
+import { TuiRoot, TuiIcon, TuiButton, TuiDropdown, TuiDataList, } from '@taiga-ui/core';
 import { TuiAvatar, TuiChevron } from '@taiga-ui/kit';
-
 @Component({
   selector: 'app-admin-layout',
   imports: [RouterOutlet, CommonModule, TuiRoot,TuiIcon, RouterModule, TuiButton, TuiAvatar, TuiChevron, TuiDropdown,TuiActiveZone, TuiObscured,TuiDataList],
