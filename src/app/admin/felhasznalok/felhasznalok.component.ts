@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { PageUser, UserControllerService } from '../../api';
 import type { TuiTablePaginationEvent } from '@taiga-ui/addon-table';
 import { TableComponent } from '../../common/table/table.component';
-import { TuiLoader,  } from '@taiga-ui/core';
+import { TuiAlertService, TuiLoader,  } from '@taiga-ui/core';
+import { HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-felhasznalok',
   imports: [TableComponent, TuiLoader],
@@ -16,7 +17,9 @@ export class FelhasznalokComponent {
   size: number = 10;
   loading: boolean = false;
 
-  constructor(private userController: UserControllerService) {
+  constructor(private userController: UserControllerService,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
+  ) {
    
   }
 
@@ -48,5 +51,25 @@ export class FelhasznalokComponent {
   onSearch(search: any){
     console.log(search);
     this.loadUsers(search);
+  }
+
+  onDelete(userId: number){
+    this.loading = true;
+    this.userController.deleteUser(userId, 'response').subscribe(
+      (response: HttpResponse<any>) => {
+        if (response.status === 204) {
+          // A törlés sikeres volt, nem kell adatokat frissíteni
+          this.loadUsers();
+          this.alerts
+          .open('Sikeres törlés!', {appearance: "positive"})
+          .subscribe();
+        }
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Hiba történt a felhasználó törlése közben:', error);
+        this.loading = false;
+      }
+    )
   }
 }
