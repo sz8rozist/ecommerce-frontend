@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="tui-col_12 form-content">
+      <div class="tui-island__paragraph tui-island__paragraph_link">
+        @for (field of fields; track $index) {
+            <div class="tui-form__row">
+                <p>
+                  <label for="username">{{field.label}}</label>
+
+                  <ng-container [ngSwitch]="field.type">
+                    <!-- Felhasználónév input -->
+                    <tui-input *ngSwitchCase="'text'" [formControlName]="field.name">{{field.placeholder}}</tui-input>
+            
+                    <!-- Jelszó input -->
+                    <tui-textfield *ngSwitchCase="'password'">
+                        <label tuiLabel>{{field.placeholder}}</label>
+                        <input
+                        [formControlName]="field.name" 
+                        tuiTextfield
+                  type="password"
+                />
+                      <tui-icon tuiPassword></tui-icon>
+                    </tui-textfield>
+            
+                    <!-- Checkbox -->
+                    <tui-checkbox *ngSwitchCase="'checkbox'" [formControlName]="field.name">
+                      {{ field.label }}
+                    </tui-checkbox>
+            
+                    <!-- Egyéb input típusok -->
+                    <input *ngSwitchDefault [type]="field.type" [formControlName]="field.name" [placeholder]="field.placeholder" />
+                  </ng-container>
+                  @if
+                  (form.get(field.name)?.hasError('backend')) {
+                  <small class="error-field">{{ form.get(field.name)?.getError("backend") }}</small>
+                  }
+                </p>
+              </div>
+        
+        }
+      </div>
+      @if (showSubmitBtn) {
+        <button tuiButton appearance="accent">{{submitButtonName}}</button>
+      }
+    </div>
+  </form>

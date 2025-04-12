@@ -1,6 +1,6 @@
 <div class="flex-container">
   <div class="login-panel">
-    <form [formGroup]="form">
+   <!-- <form [formGroup]="form">
       <div class="tui-col_12 form-content">
         <h3 class="tui-island__title">Bejelentkezés</h3>
         <p class="tui-island__paragraph">
@@ -64,8 +64,49 @@
           </div>
         </div>
       </div>
-    </form>
+    </form>-->
+    <h3 class="tui-island__title">Bejelentkezés</h3>
+    <p class="tui-island__paragraph">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+    <app-form
+    [fields]="formFields"
+            [form]="form"
+            (submitForm)="onLogin($event)"
+            [submitButtonName]="'Bejelentkezés'"
+            [showSubmitBtn]="false"
+            #loginFormComponent
+    >
+
+    </app-form>
+    <div class="buttons-container">
+      <div class="login-btn-wrapper">
+        <button
+          tuiButton
+          type="button"
+          appearance="accent"
+          (click)="loginFormComponent.onSubmit()"
+        >
+          Bejelentkezés
+        </button>
+      </div>
+          <div class="register-text">
+              Nincs még fiókod?
+              <a routerLink="/register" class="register-link">
+                Regisztrálj itt!
+              </a>
+            </div>
+      
+          <div class="forgot-password">
+              <a href="#" (click)="onForgotPassword($event)"
+                >Elfelejtett jelszavát?</a
+              >
+            </div>
+    </div>
   </div>
+
+
 
   <div class="logo-panel">
     <img

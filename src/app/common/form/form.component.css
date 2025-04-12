@@ -1,0 +1,59 @@
+/* Form tartalom beállítása */
+.form-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  /* Gombok és szöveges feliratok konténere */
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto; /* A tartalom aljára tolja a konténert */
+  }
+
+  /* A form elemek stílusai */
+  .tui-island__title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .tui-form__row {
+    margin-bottom: 15px;
+  }
+
+  .forgot-password {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .forgot-password a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+
+   /* Bejelentkezés gomb – jobbra igazítás */
+   .login-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0; /* Nincs extra margó */
+  }
+  
+  /* Szöveges felirat regisztrációhoz */
+  .register-text {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .register-text .register-link {
+    color: var(--tui-accent-color, #007bff);  /* Vagy használd a kívánt színt */
+    text-decoration: underline;
+    cursor: pointer;
+  }
