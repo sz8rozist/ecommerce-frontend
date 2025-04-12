@@ -34,23 +34,21 @@ export class LoginComponent implements OnInit {
     { name: 'username', label: 'Felhasználónév', type: 'text', placeholder: 'Írja be a felhasználó nevét', required: true },
     { name: 'password', label: 'Jelszó', type: 'password', placeholder: 'Írja be a jelszavát', required: true }
   ];
-  form: FormGroup;
+  loginForm!: FormGroup;
 
   constructor(
     private userController: UserControllerService,
     private authService: AuthServiceService,
-    private fb: FormBuilder
   ) {
-    this.form = this.fb.group({
-      username: ['', ],
-      password: ['',]
-    });
+   
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { this.loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });}
 
   onLogin(form: FormGroup) {
-    console.log(form);
     const request: SigninRequest = {
       username: form.get('username')?.value,
       password: form.get('password')?.value,

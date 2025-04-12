@@ -1,70 +1,5 @@
 <div class="flex-container">
   <div class="login-panel">
-   <!-- <form [formGroup]="form">
-      <div class="tui-col_12 form-content">
-        <h3 class="tui-island__title">Bejelentkezés</h3>
-        <p class="tui-island__paragraph">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <div class="tui-island__paragraph tui-island__paragraph_link">
-          <div class="tui-form__row">
-            <p>
-              <label for="username">Felhasználónév</label>
-              <tui-input formControlName="username">
-                Írja be a felhasználó nevét
-              </tui-input>
-              @if
-              (form.get('username')?.hasError('backend')) {
-              <small class="error-field">{{ form.get("username")?.getError("backend") }}</small>
-              }
-            </p>
-          </div>
-          <div class="tui-form__row">
-            <p>
-              <label for="password">Jelszó</label>
-              <tui-textfield>
-                <label tuiLabel>Írja be a jelszavát</label>
-                <input
-                  formControlName="password"
-                  tuiTextfield
-                  type="password"
-                />
-                <tui-icon tuiPassword />
-              </tui-textfield>
-               @if
-              (form.get('password')?.hasError('backend')) {
-              <small class="error-field">{{ form.get("password")?.getError("backend") }}</small> }
-            </p>
-          </div>
-          <div class="tui-form__row"></div>
-        </div>
-
-        <div class="buttons-container">
-          <div class="login-btn-wrapper">
-            <button
-              tuiButton
-              type="button"
-              appearance="accent"
-              (click)="onLogin()"
-            >
-              Bejelentkezés
-            </button>
-          </div>
-          <div class="register-text">
-            Nincs még fiókod?
-            <a [routerLink]="['/register']" class="register-link">
-              Regisztrálj itt!
-            </a>
-          </div>
-          <div class="forgot-password">
-            <a href="#" (click)="onForgotPassword($event)"
-              >Elfelejtett jelszavát?</a
-            >
-          </div>
-        </div>
-      </div>
-    </form>-->
     <h3 class="tui-island__title">Bejelentkezés</h3>
     <p class="tui-island__paragraph">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -72,7 +7,7 @@
     </p>
     <app-form
     [fields]="formFields"
-            [form]="form"
+            [form]="loginForm"
             (submitForm)="onLogin($event)"
             [submitButtonName]="'Bejelentkezés'"
             [showSubmitBtn]="false"
@@ -105,9 +40,6 @@
             </div>
     </div>
   </div>
-
-
-
   <div class="logo-panel">
     <img
       src="https://taiga-ui.dev/assets/images/taiga.svg"

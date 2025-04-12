@@ -25,7 +25,7 @@ export interface Field{
 
 export class FormComponent {
   @Input() fields: Field[] = []; // A form mezők konfigurációja
-  @Input() form!: FormGroup;                   // Kívülről átadott FormGroup
+  @Input() form: FormGroup = new FormGroup({});                 // Kívülről átadott FormGroup
   @Input() submitButtonName?: string;
   @Output() submitForm = new EventEmitter<any>();
   @Input() showSubmitBtn: boolean = true;
@@ -36,10 +36,10 @@ export class FormComponent {
   }
 
   hasBackendError(fieldName: string): boolean {
-    return this.form.get(fieldName)?.hasError('backend') ?? false;
+    return this.form?.get(fieldName)?.hasError('backend') ?? false;
   }
 
   getBackendError(fieldName: string): string {
-    return this.form.get(fieldName)?.getError('backend') ?? '';
+    return this.form?.get(fieldName)?.getError('backend') ?? '';
   }
 }

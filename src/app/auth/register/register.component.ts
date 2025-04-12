@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, platformCore } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { SignupRequest, UserControllerService } from '../../api';
 import { TuiIcon, TuiTextfield } from '@taiga-ui/core';
 import { TuiPassword } from '@taiga-ui/kit';
+import { FormComponent } from '../../common/form/form.component';
+import { handleBackendErrors } from '../../common/form-error-handler';
 
 @Component({
   selector: 'app-register',
@@ -19,41 +21,39 @@ import { TuiPassword } from '@taiga-ui/kit';
     CommonModule,
     TuiInputModule,
     ReactiveFormsModule,
-    TuiButton,
     RouterModule,
-    TuiIcon,
-    TuiPassword,
+    TuiButton,
+    FormComponent,
     TuiTextfield,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
-  form: FormGroup;
-
+  form!: FormGroup;
+  formFields = [
+    { name: 'username', label: 'Felhasználónév', type: 'text', placeholder: 'Írja be a felhasználó nevét', required: true },
+    { name: 'password', label: 'Jelszó', type: 'password', placeholder: 'Írja be a jelszavát', required: true },
+    { name: 'email', label: 'E-mail', type: 'text', placeholder: 'Írja be az e-mail címét', required: true}
+  ];
   constructor(private userController: UserControllerService) {
+ 
+  }
+
+  ngOnInit(): void {
     this.form = new FormGroup({
-      username: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(
-          '(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).*'
-        ),
-      ]),
+      username: new FormControl(''),
+      email: new FormControl(''),
+      password: new FormControl(''),
     });
   }
 
-  ngOnInit(): void {}
-
-  onRegister() {
-    if (this.form.valid) {
-      const request = {
-        username: this.form.get('username')?.value,
-        password: this.form.get('password')?.value,
-        email: this.form.get('email')?.value,
-        role: 'teszt',
+  onRegister(form: FormGroup) {
+      const request: SignupRequest = {
+        username: form.get('username')?.value,
+        password: form.get('password')?.value,
+        email: form.get('email')?.value,
+        role: 'ADMIN',
       };
       this.userController.signup(request).subscribe({
         next: (user) => {
@@ -62,20 +62,8 @@ export class RegisterComponent implements OnInit {
         },
         error: (err) => {
           console.error('Hiba történt a regisztrációkor:', err);
-          if (err.error?.errors) {
-            const backendErrors = err.error.errors;
-            console.log(backendErrors);
-            Object.keys(backendErrors).forEach((field) => {
-              const control = this.form.get(field);
-              if (control) {
-                control.setErrors({ backend: backendErrors[field] });
-              }
-            });
-          }
+          handleBackendErrors(err, form);
         },
       });
-    } else {
-      console.log('Az űrlap érvénytelen.');
-    }
   }
 }
