@@ -48,21 +48,24 @@ export class UserControllerService extends BaseService {
     /**
      * @param page 
      * @param size 
+     * @param username 
      * @param sortBy 
      * @param sortOrder 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findAll(page?: number, size?: number, sortBy?: string, sortOrder?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<PageUser>;
-    public findAll(page?: number, size?: number, sortBy?: string, sortOrder?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<PageUser>>;
-    public findAll(page?: number, size?: number, sortBy?: string, sortOrder?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<PageUser>>;
-    public findAll(page?: number, size?: number, sortBy?: string, sortOrder?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public findAll(page?: number, size?: number, username?: string, sortBy?: string, sortOrder?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<PageUser>;
+    public findAll(page?: number, size?: number, username?: string, sortBy?: string, sortOrder?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<PageUser>>;
+    public findAll(page?: number, size?: number, username?: string, sortBy?: string, sortOrder?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<PageUser>>;
+    public findAll(page?: number, size?: number, username?: string, sortBy?: string, sortOrder?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
           <any>page, 'page');
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
           <any>size, 'size');
+        localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+          <any>username, 'username');
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
           <any>sortBy, 'sortBy');
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

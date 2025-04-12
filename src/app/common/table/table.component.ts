@@ -8,7 +8,7 @@ import {
 import { TuiTablePaginationEvent } from '@taiga-ui/addon-table';
 import { TuiTable } from '@taiga-ui/addon-table';
 import { TuiTablePagination } from '@taiga-ui/addon-table';
-import { TuiIcon, TuiButton, TuiTextfield } from '@taiga-ui/core';
+import { TuiIcon, TuiButton, TuiTextfield, TuiLoader } from '@taiga-ui/core';
 import { TuiSearch } from '@taiga-ui/layout';
 import { TuiItemsWithMore } from '@taiga-ui/kit';
 import { CommonModule } from '@angular/common';

@@ -5,7 +5,7 @@ import { AdminRoutingModule } from './admin-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
    ]
 })
 export class AdminModule { }
