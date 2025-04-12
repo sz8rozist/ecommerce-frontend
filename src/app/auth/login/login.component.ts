@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -6,7 +6,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { TuiButton } from '@taiga-ui/core';
+import { TuiAlertService, TuiButton } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { RouterModule } from '@angular/router';
 import { JwtTokenResponse, SigninRequest, UserControllerService } from '../../api';
@@ -23,7 +23,7 @@ import { FormComponent } from '../../common/form/form.component';
     TuiInputModule,
     RouterModule,
     TuiButton,
-    FormComponent
+    FormComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private userController: UserControllerService,
     private authService: AuthServiceService,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
   ) {
    
   }
@@ -57,6 +58,9 @@ export class LoginComponent implements OnInit {
       next: (token: JwtTokenResponse) => {
         console.log('Felhasználó bejelentkezett');
         if(token.token){
+          this.alerts
+          .open('Sikeres bejelentkezés!', {appearance: "positive"})
+          .subscribe();
           this.authService.saveToken(token.token);
           this.authService.redirectBasedOnRole();
         }

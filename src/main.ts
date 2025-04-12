@@ -10,6 +10,7 @@ import { environment } from './app/environment/environment';
 import { importProvidersFrom } from '@angular/core';
 import { AuthServiceService } from './app/auth/auth-service.service';
 import {NG_EVENT_PLUGINS} from '@taiga-ui/event-plugins';
+import { tuiAlertOptionsProvider} from '@taiga-ui/core';
 const apiConfig = new Configuration({
   basePath: environment.apiUrl,
 });
@@ -23,5 +24,8 @@ bootstrapApplication(AppComponent, {
     AuthServiceService,
     { provide: Configuration, useValue: apiConfig },  // API kliens konfiguráció
     importProvidersFrom(ApiModule.forRoot(() => apiConfig)),  // ApiModule inicializálása
+    tuiAlertOptionsProvider({
+      autoClose: 3000,
+    }),
   ],
 }).catch((err) => console.error(err));

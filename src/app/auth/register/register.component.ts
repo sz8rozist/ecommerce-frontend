@@ -1,4 +1,4 @@
-import { Component, OnInit, platformCore } from '@angular/core';
+import { Component, Inject, OnInit, platformCore } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -6,14 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TuiButton } from '@taiga-ui/core';
+import { TuiAlertService, TuiButton } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { RouterModule } from '@angular/router';
 import { SignupRequest, UserControllerService } from '../../api';
-import { TuiIcon, TuiTextfield } from '@taiga-ui/core';
-import { TuiPassword } from '@taiga-ui/kit';
+import { TuiTextfield } from '@taiga-ui/core';
 import { FormComponent } from '../../common/form/form.component';
 import { handleBackendErrors } from '../../common/form-error-handler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     { name: 'password', label: 'Jelszó', type: 'password', placeholder: 'Írja be a jelszavát', required: true },
     { name: 'email', label: 'E-mail', type: 'text', placeholder: 'Írja be az e-mail címét', required: true}
   ];
-  constructor(private userController: UserControllerService) {
+  constructor(private userController: UserControllerService, @Inject(TuiAlertService) private readonly alerts: TuiAlertService, private router: Router) {
  
   }
 
@@ -58,7 +58,11 @@ export class RegisterComponent implements OnInit {
       this.userController.signup(request).subscribe({
         next: (user) => {
           console.log('Felhasználó regisztrált', user);
+          this.alerts
+              .open('Sikeres regisztráció!', {appearance: "positive"})
+              .subscribe();
           // Itt például átirányíthatod a felhasználót a főoldalra vagy másik oldalra
+          this.router.navigate(["/login"]);
         },
         error: (err) => {
           console.error('Hiba történt a regisztrációkor:', err);
