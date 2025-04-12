@@ -21,6 +21,7 @@ model/pageUser.ts
 model/pageableObject.ts
 model/product.ts
 model/productImage.ts
+model/resetPasswordRequest.ts
 model/role.ts
 model/signinRequest.ts
 model/signupRequest.ts

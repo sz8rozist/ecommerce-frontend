@@ -5,6 +5,7 @@ export * from './pageUser';
 export * from './pageableObject';
 export * from './product';
 export * from './productImage';
+export * from './resetPasswordRequest';
 export * from './role';
 export * from './signinRequest';
 export * from './signupRequest';

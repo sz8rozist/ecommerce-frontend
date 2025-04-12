@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormComponent } from '../../common/form/form.component';
-import { UserControllerService } from '../../api';
+import { handleBackendErrors } from '../../common/form-error-handler';
+import { UserControllerService } from '../../api/api/userController.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -33,6 +34,15 @@ export class ForgotPasswordComponent implements OnInit {
 
   sendEmailForForgotPassowrd(formGroup: FormGroup) {
     console.log(formGroup)
-    this.userController.forgotPassword(formGroup.get("email")?.value)
+    this.userController.forgotPassword(formGroup.get("email")?.value).subscribe({
+       next: () => {
+              console.log('Elfelejtett jelszó küldés sikeres');
+          
+            },
+            error: (err) => {
+              console.error('Hiba történt az elfelejtett jelszó közben:', err);
+              handleBackendErrors(err, formGroup);
+            },
+    })
   }
 }

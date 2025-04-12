@@ -9,9 +9,10 @@
  */
 
 
-export interface SortObject { 
-    empty?: boolean;
-    unsorted?: boolean;
-    sorted?: boolean;
+export interface ResetPasswordRequest { 
+    token?: string;
+    oldPassword: string;
+    newPassword: string;
+    newPasswordConfirm: string;
 }
 
