@@ -2,21 +2,116 @@
     <div class="admin-container">
       <!-- Sidebar -->
       <nav [class.collapsed]="isCollapsed" class="sidebar">
-        <button tuiIconButton [iconStart]="isCollapsed ? '@tui.menu' : '@tui.x'"  (click)="toggleSidebar()" appearance="flat"></button>
+        <button
+          tuiIconButton
+          [iconStart]="isCollapsed ? '@tui.menu' : '@tui.x'"
+          (click)="toggleSidebar()"
+          appearance="flat"
+        ></button>
+      
+        <!-- Kezdőlap szekció -->
+        <div class="menu-section">
+          <div class="section-title" *ngIf="!isCollapsed">Áttekintés</div>
+          <ul>
+            <li routerLink="dashboard">
+              <tui-icon icon="@tui.home"></tui-icon>
+              <span *ngIf="!isCollapsed">Kezdőlap</span>
+            </li>
+          </ul>
+        </div>
+
+         <!-- Termékek szekció -->
+         <div class="menu-section">
+          <div class="section-title" *ngIf="!isCollapsed">Termék</div>
+          <ul>
+            <li routerLink="dashboard">
+              <tui-icon icon="@tui.package-search"></tui-icon>
+              <span *ngIf="!isCollapsed">Termékek</span>
+            </li>
+            <li routerLink="dashboard">
+              <tui-icon icon="@tui.package-plus"></tui-icon>
+              <span *ngIf="!isCollapsed">Új termék</span>
+            </li>
+            <li routerLink="dashboard">
+              <tui-icon icon="@tui.boxes"></tui-icon>
+              <span *ngIf="!isCollapsed">Kategóriák</span>
+            </li>
+            <li routerLink="dashboard">
+              <tui-icon icon="@tui.percent"></tui-icon>
+              <span *ngIf="!isCollapsed">Akciók / Kedvezmények</span>
+            </li>
+            <li routerLink="dashboard">
+              <tui-icon icon="@tui.container"></tui-icon>
+              <span *ngIf="!isCollapsed">Készletfigyelés</span>
+            </li>
+          </ul>
+        </div>
+       <!-- Rendelések szekció -->
+       <div class="menu-section">
+        <div class="section-title" *ngIf="!isCollapsed">Rendelés</div>
         <ul>
           <li routerLink="dashboard">
-              <tui-icon icon="@tui.home"></tui-icon>
-              <span *ngIf="!isCollapsed">Dashboard</span>
-          </li>
-          <li routerLink="users">
-              <tui-icon icon="@tui.user"></tui-icon>
-              <span *ngIf="!isCollapsed">Felhasználók</span>
-          </li>
-          <li routerLink="settings">
-              <tui-icon icon="@tui.settings" ></tui-icon>
-              <span *ngIf="!isCollapsed">Beállítások</span>
+            <tui-icon icon="@tui.shuffle"></tui-icon>
+            <span *ngIf="!isCollapsed">Rendelések</span>
           </li>
         </ul>
+      </div>
+       <!-- Fizetési módok szekció -->
+       <div class="menu-section">
+        <div class="section-title" *ngIf="!isCollapsed">Fizetési mód</div>
+        <ul>
+          <li routerLink="dashboard">
+            <tui-icon icon="@tui.hand-coins"></tui-icon>
+            <span *ngIf="!isCollapsed">Fizetési módok</span>
+          </li>
+          <li routerLink="dashboard">
+            <tui-icon icon="@tui.banknote-arrow-up"></tui-icon>
+            <span *ngIf="!isCollapsed">Tranzakciók</span>
+          </li>
+        </ul>
+      </div>
+      <!-- Szállítás szekció -->
+      <div class="menu-section">
+        <div class="section-title" *ngIf="!isCollapsed">Szállítás</div>
+        <ul>
+          <li routerLink="dashboard">
+            <tui-icon icon="@tui.truck"></tui-icon>
+            <span *ngIf="!isCollapsed">Szállítási módok</span>
+          </li>
+          <li routerLink="dashboard">
+            <tui-icon icon="@tui.package-search"></tui-icon>
+            <span *ngIf="!isCollapsed">Csomagkövetés</span>
+          </li>
+        </ul>
+      </div>
+       <!-- Üzenetek szekció -->
+       <div class="menu-section">
+        <div class="section-title" *ngIf="!isCollapsed">Üzenetek</div>
+        <ul>
+          <li routerLink="dashboard">
+            <tui-icon icon="@tui.mail-check"></tui-icon>
+            <span *ngIf="!isCollapsed">Beérkező üzenetek</span>
+          </li>
+          <li routerLink="dashboard">
+            <tui-icon icon="@tui.message-square"></tui-icon>
+            <span *ngIf="!isCollapsed">Vásárlói jegyek / Support</span>
+          </li>
+        </ul>
+      </div>
+        <!-- Adminisztráció szekció -->
+        <div class="menu-section">
+          <div class="section-title" *ngIf="!isCollapsed">Adminisztráció</div>
+          <ul>
+            <li routerLink="users">
+              <tui-icon icon="@tui.user"></tui-icon>
+              <span *ngIf="!isCollapsed">Felhasználók</span>
+            </li>
+            <li routerLink="settings">
+              <tui-icon icon="@tui.settings"></tui-icon>
+              <span *ngIf="!isCollapsed">Beállítások</span>
+            </li>
+          </ul>
+        </div>
       </nav>
   
       <!-- Content -->

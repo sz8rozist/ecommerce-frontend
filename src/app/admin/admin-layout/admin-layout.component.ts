@@ -6,13 +6,14 @@ import { TuiRoot, TuiIcon, TuiButton, TuiDropdown, TuiDataList, } from '@taiga-u
 import { TuiAvatar, TuiChevron } from '@taiga-ui/kit';
 @Component({
   selector: 'app-admin-layout',
-  imports: [RouterOutlet, CommonModule, TuiRoot,TuiIcon, RouterModule, TuiButton, TuiAvatar, TuiChevron, TuiDropdown,TuiActiveZone, TuiObscured,TuiDataList],
+  imports: [RouterOutlet, CommonModule, TuiRoot,TuiIcon, RouterModule, TuiButton, TuiAvatar, TuiChevron, TuiDropdown,TuiActiveZone, TuiObscured,TuiDataList, TuiDropdown],
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.css'
 })
 export class AdminLayoutComponent {
   isCollapsed = false;
   username = 'Admin';
+  dropdownOpen = false;
 
   constructor(private router: Router) {}
 

@@ -5,7 +5,7 @@
 
   .admin-container {
     display: flex;
-    height: 100vh;
+    height: 100%;
   }
   
   .sidebar {
@@ -66,4 +66,5 @@
     margin: 0 auto;
     transition: transform 0.2s;
     margin: 20px;
+    height: 100%;
   }
