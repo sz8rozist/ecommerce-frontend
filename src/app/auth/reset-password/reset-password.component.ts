@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormComponent } from '../../common/form/form.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ResetPasswordRequest, UserControllerService } from '../../api';
 import { handleBackendErrors } from '../../common/form-error-handler';
 import { ActivatedRoute } from '@angular/router';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-reset-password',
@@ -39,7 +40,8 @@ export class ResetPasswordComponent {
 
   constructor(
     private userController: UserControllerService,
-    private activetedRoute: ActivatedRoute
+    private activetedRoute: ActivatedRoute,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +65,9 @@ export class ResetPasswordComponent {
     this.userController.resetPassword(request).subscribe({
       next: () => {
         console.log('Jelszó visszaállítás sikeres');
+        this.alerts
+        .open('Sikeres email küldés!', {appearance: "positive"})
+        .subscribe();
       },
       error: (err) => {
         console.error('Hiba történt jelszó visszaállítás közben:', err);
